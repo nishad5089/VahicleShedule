@@ -1,0 +1,58 @@
+﻿@model Identity.Models.SheduleVahicle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SheduleVahicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift.ShiftTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shift.ShiftTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VahicleInfo.RegNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VahicleInfo.RegNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SheduleDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SheduleDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

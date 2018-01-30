@@ -1,0 +1,64 @@
+﻿@model Identity.Models.SheduleVahicle
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SheduleVahicle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift.ShiftTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shift.ShiftTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VahicleInfo.RegNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VahicleInfo.RegNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SheduleDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SheduleDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

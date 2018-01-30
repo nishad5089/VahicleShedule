@@ -25,9 +25,13 @@ namespace Identity.Models
         {
         }
 
+       
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+        public DbSet<VahicleInfo> VahicleInfo { get; set; }
+        public DbSet<VahicleShift> VahicleShifts { get; set; }
+        public DbSet<SheduleVahicle> SheduleVahicles { get; set; }
     }
 }
