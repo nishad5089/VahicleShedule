@@ -7,9 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Identity.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Identity.Controllers
 {
+   
     public class SheduleVahiclesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,8 +20,39 @@ namespace Identity.Controllers
         // GET: SheduleVahicles
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+
+
+                if (!isAdminUser())
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var sheduleVahicles = db.SheduleVahicles.Include(s => s.Shift).Include(s => s.VahicleInfo);
             return View(sheduleVahicles.ToList());
+        }
+        public Boolean isAdminUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Admin")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
         // GET: SheduleVahicles/Details/5
@@ -39,6 +73,22 @@ namespace Identity.Controllers
         // GET: SheduleVahicles/Create
         public ActionResult Create()
         {
+
+            if (User.Identity.IsAuthenticated)
+            {
+
+
+                if (!isAdminUser())
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
             ViewBag.ShiftId = new SelectList(db.VahicleShifts, "Id", "ShiftTime");
             ViewBag.VahicleInfoId = new SelectList(db.VahicleInfo, "Id", "RegNo");
             return View();
@@ -53,6 +103,19 @@ namespace Identity.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (User.Identity.IsAuthenticated)
+                {
+
+
+                    if (!isAdminUser())
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
 
                 db.SheduleVahicles.Add(sheduleVahicle);
                 db.SaveChanges();
